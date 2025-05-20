@@ -32,12 +32,12 @@ class ProductTest < ActiveSupport::TestCase
 
     product.price = -1
     assert product.invalid?
-    assert_equal ["must be greater than or equal to 0.01"],
+    assert_equal [ "must be greater than or equal to 0.01" ],
                  product.errors[:price]
 
     product.price = 0
     assert product.invalid?
-    assert_equal ["must be greater than or equal to 0.01"],
+    assert_equal [ "must be greater than or equal to 0.01" ],
                  product.errors[:price]
 
     product.price = 1
@@ -97,7 +97,7 @@ class ProductTest < ActiveSupport::TestCase
     )
 
     assert product.invalid?
-    assert_equal ["has already been taken"], product.errors[:title]
+    assert_equal [ "has already been taken" ], product.errors[:title]
   end
 
   test "product is not valid without a unique title - i18n" do
@@ -113,7 +113,7 @@ class ProductTest < ActiveSupport::TestCase
     )
 
     assert product.invalid?
-    assert_equal [I18n.translate("errors.messages.taken")],
+    assert_equal [ I18n.translate("errors.messages.taken") ],
                  product.errors[:title]
   end
 end
