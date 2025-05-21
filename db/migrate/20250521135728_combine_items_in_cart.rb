@@ -36,6 +36,4 @@ def down
     line_item.destroy
   end
 end
-
-
 end
