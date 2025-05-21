@@ -24,7 +24,7 @@ class LineItemsController < ApplicationController
    # POST /line_items or /line_items.json
    def create
   product = Product.find(params[:product_id])
-  @line_item = @cart.line_items.build(product: product)
+  @line_item = @cart.add_product(product) # Usa el método inteligente
 
   respond_to do |format|
     if @line_item.save
@@ -72,6 +72,7 @@ end
 
     # Only allow a list of trusted parameters through.
     def line_item_params
-      params.expect(line_item: [ :product_id, :cart_id ])
+      params.expect(line_item: [ :product_id ])
     end
+
 end
