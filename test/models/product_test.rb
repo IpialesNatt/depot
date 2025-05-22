@@ -81,7 +81,7 @@ class ProductTest < ActiveSupport::TestCase
       filename: "logo.svg",
       content_type: "image/svg+xml"
     )
-    # assert_not product.valid?, "image/svg+xml must be invalid"
+     assert_not product.valid?, "image/svg+xml must be invalid"
   end
 
   test "product is not valid without a unique title" do

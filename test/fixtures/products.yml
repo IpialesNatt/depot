@@ -1,18 +1,17 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  description: MyText
-  image_url: MyString
-  price: 9.99
+  title: "Ruby Programming"
+  description: "Learn Ruby basics"
+  price: 29.99
 
 two:
-  title: MyString
-  description: MyText
-  image_url: MyString
-  price: 9.99
+  title: "Rails Guide"
+  description: "Master Ruby on Rails"
+  price: 39.99
 
 pragprog:
   title: The Pragmatic Programmer
   description: Your Journey To Mastery, 20th Anniversary Edition (2nd Edition)
   price: 39.99
+
