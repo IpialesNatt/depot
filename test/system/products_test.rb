@@ -15,9 +15,10 @@ class ProductsTest < ApplicationSystemTestCase
     click_on "New product"
 
     fill_in "Description", with: @product.description
-    fill_in "Image url", with: @product.image_url
+    attach_file "product_image", Rails.root.join("test/fixtures/files/lorem.jpg")
     fill_in "Price", with: @product.price
-    fill_in "Title", with: @product.title
+    fill_in "Title", with: "Test Product #{SecureRandom.hex(4)}"
+
     click_on "Create Product"
 
     assert_text "Product was successfully created"
@@ -29,7 +30,7 @@ class ProductsTest < ApplicationSystemTestCase
     click_on "Edit this product", match: :first
 
     fill_in "Description", with: @product.description
-    fill_in "Image url", with: @product.image_url
+   attach_file "product_image", Rails.root.join("test/fixtures/files/lorem.jpg")
     fill_in "Price", with: @product.price
     fill_in "Title", with: @product.title
     click_on "Update Product"

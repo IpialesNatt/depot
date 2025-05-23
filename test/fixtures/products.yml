@@ -15,3 +15,8 @@ pragprog:
   description: Your Journey To Mastery, 20th Anniversary Edition (2nd Edition)
   price: 39.99
 
+ruby_book:
+  title: "Programming Ruby"
+  description: "The Pragmatic Programmer's Guide"
+  price: 49.50
+  image_url: "lorem.jpg"

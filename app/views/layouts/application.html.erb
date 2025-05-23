@@ -16,6 +16,10 @@
 </head>
 
 <body>
+  <% if notice %>
+    <div class="alert alert-success"><%= notice %></div>
+  <% end %>
+
   <header class="bg-green-700">
     <%= image_tag 'logo.svg', alt: 'The Pragmatic Bookshelf' %>
     <h1><%= @page_title %></h1>
@@ -24,10 +28,10 @@
   <section class="flex">
     <nav class="bg-green-900 p-6">
       <ul class="text-gray-300 leading-8">
-        <li><a href="/">Inicio</a></li>
-        <li><a href="/questions">Preguntas</a></li>
-        <li><a href="/news">Noticias</a></li>
-        <li><a href="/contact">Contacto</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/questions">Questions</a></li>
+        <li><a href="/news">News</a></li>
+        <li><a href="/contact">Contact</a></li>
       </ul>
     </nav>
 

@@ -10,17 +10,15 @@ class LineItemsTest < ApplicationSystemTestCase
     assert_selector "h1", text: "Line items"
   end
 
-  test "should create line item" do
-    visit line_items_url
-    click_on "New line item"
+test "should create line item" do
+  visit store_index_url
+  first(:button, "Add to Cart").click
 
-    fill_in "Cart", with: @line_item.cart_id
-    fill_in "Product", with: @line_item.product_id
-    click_on "Create Line item"
+  # Esperamos que la página recargue (AJAX puede tardar, así que usamos assert_text)
+  assert_text "Your Pragmatic Catalog"  # o algún texto que esté siempre
+  assert_selector "li", text: products(:one).title  # si se muestra el título
+end
 
-    assert_text "Line item was successfully created"
-    click_on "Back"
-  end
 
   test "should update Line item" do
     visit line_item_url(@line_item)

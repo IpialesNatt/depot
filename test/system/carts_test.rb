@@ -30,10 +30,22 @@ class CartsTest < ApplicationSystemTestCase
     click_on "Back"
   end
 
-  test "should destroy Cart" do
-    visit cart_url(@cart)
-    accept_confirm { click_on "Destroy this cart", match: :first }
+  # test "should destroy Cart" do
+  #  visit cart_url(@cart)
+  #  accept_confirm { click_on "Destroy this cart", match: :first }
 
-    assert_text "Cart was successfully destroyed"
+  # assert_text "Cart was successfully destroyed"
+  # end
+
+  test "should destroy Cart" do
+  visit cart_url(@cart)
+
+  assert_selector "form button", text: "Empty cart"  # Verifica que el botón esté
+
+  accept_confirm do
+    click_button "Empty cart"
   end
+
+  assert_text "Cart was successfully destroyed"  # Verifica que el mensaje salga
+end
 end
