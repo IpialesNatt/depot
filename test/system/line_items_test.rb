@@ -16,9 +16,8 @@ test "should create line item" do
 
   # Esperamos que la página recargue (AJAX puede tardar, así que usamos assert_text)
   assert_text "Your Pragmatic Catalog"  # o algún texto que esté siempre
-  assert_selector "li", text: products(:one).title  # si se muestra el título
+  assert_selector "td", text: products(:one).title  # si se muestra el título
 end
-
 
   test "should update Line item" do
     visit line_item_url(@line_item)

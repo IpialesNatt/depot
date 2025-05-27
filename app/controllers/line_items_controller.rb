@@ -28,7 +28,8 @@ class LineItemsController < ApplicationController
 
   respond_to do |format|
     if @line_item.save
-      format.html { redirect_to store_index_url, notice: "Line item was successfully created." }
+      format.html { redirect_to @cart, notice: "Line item was successfully created." }
+
       format.json { render :show, status: :created, location: @line_item }
     else
       format.html { render :new, status: :unprocessable_entity }
@@ -63,11 +64,10 @@ end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_line_item
-      @line_item = LineItem.find(params.expect(:id))
-    end
+  @line_item = LineItem.find(params[:id])
+end
 
-    # Only allow a list of trusted parameters through.
-    def line_item_params
-      params.expect(line_item: [ :product_id ])
-    end
+def line_item_params
+  params.require(:line_item).permit(:product_id)
+end
 end

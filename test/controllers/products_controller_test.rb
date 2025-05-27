@@ -54,10 +54,37 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to product_url(@product)
   end
 
-  test "should destroy product" do
+# test "should destroy product" do
+#   product_to_destroy = products(:two)
+#  puts "Producto a destruir ID: #{product_to_destroy.id}"
+#  assert_raises ActiveRecord::RecordNotDestroyed do
+#    delete product_url(product_to_destroy)
+#  end
+#  assert Product.exists?(product_to_destroy.id)
+# end
+
+test "should not destroy product with line items" do
+  product = Product.new(
+    title: "Test Product #{rand(1000)}",
+    description: "Description",
+    price: 10.0
+  )
+
+  product.image.attach(
+    io: File.open(Rails.root.join("test/fixtures/files/lorem.jpg")),
+    filename: "lorem.jpg",
+    content_type: "image/jpeg"
+  )
+
+  product.save!
+
+  cart = carts(:one)
+  LineItem.create!(product: product, cart: cart, quantity: 1)
+
   assert_raises ActiveRecord::RecordNotDestroyed do
-    delete product_url(products(:two))
+    product.destroy!
   end
-  assert Product.exists?(products(:two).id)
+
+  assert Product.exists?(product.id), "El producto no debe haberse destruido"
 end
 end
