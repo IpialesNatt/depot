@@ -3,7 +3,18 @@
 one:
   product: pragprog
   cart: one
+  price: 29.99 # Coincide con el precio de product :one en products.yml
+  quantity: 1
 
 two:
   product: two
   cart: two
+  price: 39.99 # Coincide con el precio de product :two
+  quantity: 2
+
+pragprog_item:
+  product: pragprog
+  cart: one
+  price: 39.99 # Coincide con product :pragprog
+  quantity: 1
+  

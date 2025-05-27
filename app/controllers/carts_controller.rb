@@ -48,17 +48,6 @@ class CartsController < ApplicationController
     end
   end
 
-# DELETE /carts/1 or /carts/1.json
-# def destroy
-# @cart.destroy! if @cart.id == session[:cart_id]
-# session[:cart_id] = nil
-
-#  respond_to do |format|
-#   format.html { redirect_to store_index_path, status: :see_other,
-#                notice: "Your cart is currently empty" }
-# format.json { head :no_content }
-# end
-# end
 
 def destroy
   @cart = Cart.find(params[:id])

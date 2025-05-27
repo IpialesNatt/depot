@@ -1,34 +1,21 @@
-<div id="<%= dom_id cart %>">
-  <h2 class="font-bold text-lg mb-3">Your Cart</h2>
-
-  <table class="table-auto">
+<div id="<%= dom_id cart %>" class="bg-white rounded-lg p-4 shadow-md">
+  <h2 class="font-bold text-lg mb-3 text-gray-800">Your Cart</h2>
+  
+  <table class="w-full">
     <% cart.line_items.each do |line_item| %>
-      <tr>
-        <td class="text-right"><%= line_item.quantity %></td>
-        <td>&times;</td>
-        <td class="pr-2">
-          <%= line_item.product.title %>
-        </td>
-        <td class="text-right font-bold">
-          <%= number_to_currency(line_item.total_price) %>
-        </td>
-        <td>
-          <%= button_to 'Remove', line_item_path(line_item), method: :delete,
-                class: 'text-sm bg-red-600 text-white rounded px-2 py-1 ml-2',
-                data: { turbo_confirm: 'Are you sure?' } %>
-        </td>
-      </tr>
+      <%= render line_item %>
     <% end %>
+    
     <tfoot>
-      <tr>
+      <tr class="border-t-2 border-black">
         <th class="text-right pr-2 pt-2" colspan="3">Total:</th>
-        <td class="text-right pt-2 font-bold border-t-2 border-black">
+        <td class="text-right pt-2 font-bold">
           <%= number_to_currency(cart.total_price) %>
         </td>
       </tr>
     </tfoot>
   </table>
 
-  <%= button_to 'Empty Cart', cart, method: :delete,
-      class: 'ml-4 rounded-lg py-1 px-2 text-white bg-green-600' %>
+  <%= button_to 'Empty Cart', cart, method: :delete, 
+                class: 'mt-4 ml-auto rounded-lg py-1 px-2 text-white bg-red-600 hover:bg-red-700' %>
 </div>

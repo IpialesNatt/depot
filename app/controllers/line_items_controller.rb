@@ -28,8 +28,8 @@ class LineItemsController < ApplicationController
 
   respond_to do |format|
     if @line_item.save
-      format.html { redirect_to @cart, notice: "Line item was successfully created." }
-
+     format.turbo_stream { @current_item = @line_item }
+      format.html { redirect_to store_index_url }
       format.json { render :show, status: :created, location: @line_item }
     else
       format.html { render :new, status: :unprocessable_entity }
