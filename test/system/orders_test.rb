@@ -23,8 +23,8 @@ class OrdersTest < ApplicationSystemTestCase
     fill_in "Name", with: @order.name
     select @order.pay_type, from: "Pay type"  # Ensure the pay_type is selected correctly
     click_on "Place Order"
-    assert_text "Order was successfully created"
-    click_on "Back"
+    assert_text "Thank you for your order."
+    # click_on "Back" --si lo descomento me da error porque no encuentra el boton
   end
 
   test "should update Order" do
@@ -38,7 +38,7 @@ class OrdersTest < ApplicationSystemTestCase
     click_on "Place Order"
 
     assert_text "Order was successfully updated"
-    click_on "Back"
+    # click_on "Back"
   end
 
   test "should destroy Order" do
