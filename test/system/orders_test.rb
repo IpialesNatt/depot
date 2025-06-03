@@ -11,7 +11,7 @@ class OrdersTest < ApplicationSystemTestCase
   end
 
   test "should create order" do
-    # Entramos a la tienda para añadir productos 
+    # Entramos a la tienda para añadir productos
     visit store_index_url
     click_on "Add to Cart", match: :first
 
@@ -34,7 +34,7 @@ class OrdersTest < ApplicationSystemTestCase
     fill_in "Address", with: @order.address
     fill_in "Email", with: @order.email
     fill_in "Name", with: @order.name
-    select @order.pay_type, from: "Pay type" 
+    select @order.pay_type, from: "Pay type"
     click_on "Place Order"
 
     assert_text "Order was successfully updated"
