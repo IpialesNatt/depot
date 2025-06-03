@@ -1,9 +1,10 @@
-<% if line_item == @current_item %>
-<tr class="line-item-highlight">
-    <% else %>
-<tr>
-    <% end %>
-    <td class="text-right"><%= line_item.quantity %></td>
+<tr id="<%= dom_id(line_item) %>" class="<%= 'line-item-highlight' if line_item == @current_item %>">
+
+    <td class="text-right"><%= line_item.quantity %>
+    <%= button_to '-', decrement_line_item_path(line_item), method: :patch,
+            data: { turbo_stream: true },
+      class: 'px-2 py-1 bg-gray-300 rounded' %>
+    </td>
     <td>&times;</td>
     <td class="pr-2">
         <%= line_item.product.title %>

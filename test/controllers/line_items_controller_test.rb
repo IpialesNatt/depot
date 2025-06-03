@@ -33,7 +33,7 @@ test "should create line_item via turbo-stream" do
   end
 
   assert_response :success
-  assert_match /<tr class="line-item-highlight">/, @response.body
+  assert_select "tr.line-item-highlight"
 end
 
   test "should show line_item" do

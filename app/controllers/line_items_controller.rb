@@ -1,7 +1,7 @@
 class LineItemsController < ApplicationController
  include CurrentCart
   before_action :set_cart, only: %i[ create ]
-  before_action :set_line_item, only: %i[ show edit update destroy ]
+  before_action :set_line_item, only: %i[ show edit update destroy decrement]
 
   # GET /line_items or /line_items.json
   def index
@@ -69,5 +69,19 @@ end
 
 def line_item_params
   params.require(:line_item).permit(:product_id)
+end
+
+def decrement
+  @line_item = LineItem.find(params[:id])
+  if @line_item.quantity > 1
+    @line_item.update(quantity:  @line_item.quantity - 1)
+  else
+    @line_item.destroy
+  end
+
+  respond_to do |format|
+    format.turbo_stream
+    format.html { redirect_to cart_path(@line_item.cart) }
+  end
 end
 end

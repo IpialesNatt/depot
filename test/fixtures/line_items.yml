@@ -15,6 +15,7 @@ two:
 pragprog_item:
   product: pragprog
   cart: one
+  order_id: one
   price: 39.99 # Coincide con product :pragprog
   quantity: 1
   

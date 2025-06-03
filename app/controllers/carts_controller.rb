@@ -49,16 +49,36 @@ class CartsController < ApplicationController
   end
 
 
+# def destroy
+# @cart = Cart.find(params[:id])
+# @cart.destroy
+# session[:cart_id] = nil
+
+# respond_to do |format|
+#   format.html { redirect_to store_index_url, notice: "Cart was successfully destroyed" }
+#  format.json { head :no_content }
+#  end
+# end
+
 def destroy
-  @cart = Cart.find(params[:id])
+  @cart = Cart.find_by(id: params[:id])
+  if @cart.nil?
+    respond_to do |format|
+      format.html { redirect_to store_index_url, alert: "Cart not found" }
+      format.json { render json: { error: "Cart not found" }, status: :not_found }
+    end
+    return
+  end
+
   @cart.destroy
-  session[:cart_id] = nil
+  session[:cart_id] = nil if @cart.id == session[:cart_id]
 
   respond_to do |format|
     format.html { redirect_to store_index_url, notice: "Cart was successfully destroyed" }
     format.json { head :no_content }
   end
 end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -1,0 +1,7 @@
+<% if @line_item.destroyed? %>
+  <%= turbo_stream.remove dom_id(@line_item) %>
+<% else %>
+  <%= turbo_stream.replace @line_item do %>
+    <%= render @line_item %>
+  <% end %>
+<% end %>
