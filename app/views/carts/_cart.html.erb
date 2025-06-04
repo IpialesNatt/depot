@@ -1,27 +1,32 @@
 <div id="<%= dom_id cart %>" class="bg-white rounded-lg p-4 shadow-md">
-  <h2 class="font-bold text-lg mb-3 text-gray-800">Your Cart</h2>
-  
-  <table class="w-full">
-    <% cart.line_items.each do |line_item| %>
-      <%= render line_item %>
-    <% end %>
-    
-    <tfoot>
-      <tr class="border-t-2 border-black">
-        <th class="text-right pr-2 pt-2" colspan="3">Total:</th>
-        <td class="text-right pt-2 font-bold">
-          <%= number_to_currency(cart.total_price) %>
-        </td>
-      </tr>
-    </tfoot>
-  </table>
-<%# a div wrapped the 2 bottons optiones %>
- <div class="flex mt-1"> 
-  <%= button_to 'Empty Cart', cart, method: :delete,
+    <h2 class="font-bold text-lg mb-3 text-gray-800">Your Cart</h2>
+
+    <table class="w-full">
+        <% cart.line_items.each do |line_item| %>
+        <%= render line_item %>
+        <% end %>
+
+        <tfoot>
+            <tr class="border-t-2 border-black">
+                <th class="text-right pr-2 pt-2" colspan="3">Total:</th>
+                <td class="text-right pt-2 font-bold">
+                    <%= number_to_currency(cart.total_price) %>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    <%# a div wrapped the 2 bottons optiones %>
+    <div class="flex mt-1">
+
+        <%= button_to 'Empty Cart', cart, method: :delete,
       class: 'ml-4 rounded-lg py-1 px-2 text-white bg-green-600' %>
 
-  <%= button_to 'Checkout', new_order_path, method: :get,
+        <% if request.path == new_order_path %>
+        <%= button_to 'Checkout', '#', disabled: true, class: "disabled-button" %>
+        <% else %>
+        <%= button_to 'Checkout', new_order_path, method: :get,
       class: 'ml-4 rounded-lg py-1 px-2 text-black bg-green-200' %>
-</div>
+        <% end %>
+    </div>
 
 </div>
