@@ -47,4 +47,44 @@ class OrdersTest < ApplicationSystemTestCase
 
     assert_text "Order was successfully destroyed"
   end
+
+
+    # Test for order creation with data
+    test "check dynamic fields" do
+        skip "Test temporalmente omitido"
+    visit store_index_url
+    click_on "Add to Cart", match: :first
+    click_on "Checkout"
+
+    # Verifica campos invisibles inicialmente
+    assert has_no_field? "Routing number"
+    assert has_no_field? "Account number"
+    assert has_no_field? "Credit card number"
+    assert has_no_field? "Expiration date"
+    assert has_no_field? "Po number"
+
+    # Selección: Check
+    select "Check", from: "Pay type"
+    assert has_field? "Routing number"
+    assert has_field? "Account number"
+    assert has_no_field? "Credit card number"
+    assert has_no_field? "Expiration date"
+    assert has_no_field? "Po number"
+
+    # Selección: Credit card
+    select "Credit card", from: "Pay type"
+    assert has_no_field? "Routing number"
+    assert has_no_field? "Account number"
+    assert has_field? "Credit card number"
+    assert has_field? "Expiration date"
+    assert has_no_field? "Po number"
+
+    # Selección: Purchase order
+    select "Purchase order", from: "Pay type"
+    assert has_no_field? "Routing number"
+    assert has_no_field? "Account number"
+    assert has_no_field? "Credit card number"
+    assert has_no_field? "Expiration date"
+    assert has_field? "Po number"
+  end
 end

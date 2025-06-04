@@ -41,15 +41,15 @@
 
     </div>
 
-    <div data-payment-target="payType" data-type="Check" class="hidden">
+    <div data-payment-target="additionalFields" data-type="Check" class="hidden">
         <%= render partial: 'check', locals: { form: form } %>
     </div>
 
-    <div data-payment-target="payType" data-type="Credit card" class="hidden">
+    <div data-payment-target="additionalFields" data-type="Credit card" class="hidden">
         <%= render partial: 'cc', locals: { form: form } %>
     </div>
 
-    <div data-payment-target="payType" data-type="Purchase order" class="hidden">
+    <div data-payment-target="additionalFields" data-type="Purchase order" class="hidden">
         <%= render partial: 'po', locals: { form: form } %>
     </div>
 </div>
