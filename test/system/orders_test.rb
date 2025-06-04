@@ -21,7 +21,7 @@ class OrdersTest < ApplicationSystemTestCase
     fill_in "Address", with: @order.address
     fill_in "Email", with: @order.email
     fill_in "Name", with: @order.name
-    select @order.pay_type, from: "Pay type"  # Ensure the pay_type is selected correctly
+    select @order.payment_type.name, from: "Pay type"    # Ensure the pay_type is selected correctly
     click_on "Place Order"
     assert_text "Thank you for your order."
     # click_on "Back" --si lo descomento me da error porque no encuentra el boton
@@ -34,7 +34,7 @@ class OrdersTest < ApplicationSystemTestCase
     fill_in "Address", with: @order.address
     fill_in "Email", with: @order.email
     fill_in "Name", with: @order.name
-    select @order.pay_type, from: "Pay type"
+   select @order.payment_type.name, from: "Pay type"
     click_on "Place Order"
 
     assert_text "Order was successfully updated"

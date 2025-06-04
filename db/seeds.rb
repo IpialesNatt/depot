@@ -7,7 +7,10 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+LineItem.delete_all
+Order.delete_all
 Product.delete_all
+PaymentType.delete_all
 # . . .
 product = Product.create(title: 'Rails Scales!',
 description:
@@ -25,7 +28,11 @@ maintaining it.
 </p>),
 price: 30.95)
 product.image.attach(io: File.open(
-Rails.root.join('db', 'images', 'camiseta.jpg')),
+Rails.root.join('db', 'images', 'cprpo.jpg')),
 filename: 'cprpo.jpg')
-product.save!
+# product.save!
 # . . .
+
+PaymentType.create(name: 'Check')
+PaymentType.create(name: 'Credit card')
+PaymentType.create(name: 'Purchase order')

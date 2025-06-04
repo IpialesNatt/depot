@@ -70,7 +70,7 @@ before_action :set_order, only: %i[ show edit update destroy ]
 
     # Only allow a list of trusted parameters through.
     def order_params
-      params.expect(order: [ :name, :address, :email, :pay_type ])
+      params.require(:order).permit(:name, :address, :email, :payment_type_id)
     end
 
 # Ensure the cart is not empty before proceeding with order creation
