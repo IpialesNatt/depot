@@ -3,7 +3,7 @@ require "test_helper"
 class OrdersControllerTest < ActionDispatch::IntegrationTest
   setup do
     @order = orders(:one)
-     @payment_type = payment_types(:one)  # Agregado nuevo
+    @payment_type = payment_types(:one)  # Agregado nuevo
   end
 
   test "should get index" do
