@@ -66,6 +66,6 @@ end
 
 gem "hotwire-spark", "~> 0.1.13", group: :development
 
-gem "solargraph", "~> 0.54.4", group: :development
+gem "solargraph", "~> 0.55.0", group: :development
 
 gem "bcrypt", "~> 3.1.7"
