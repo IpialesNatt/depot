@@ -1,5 +1,5 @@
 module Authentication
-  require 'securerandom'
+  require "securerandom"
 
   extend ActiveSupport::Concern
 

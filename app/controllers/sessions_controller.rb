@@ -10,7 +10,7 @@ def create
   if User.count.zero?
     user = User.find_or_initialize_by(email_address: params[:email_address])
     if user.new_record?
-      user.name = params[:email_address].split('@').first
+      user.name = params[:email_address].split("@").first
       user.password = SecureRandom.hex(16)
       user.password_confirmation = user.password
       user.save!(validate: false)
