@@ -4,6 +4,7 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
   setup do
     @order = orders(:one)
     @payment_type = payment_types(:one)  # Agregado nuevo
+    login_as users(:one)  # Asegúrate de que el usuario esté autenticado
   end
 
   test "should get index" do

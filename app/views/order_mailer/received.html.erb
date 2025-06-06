@@ -1,0 +1,10 @@
+<h1>Pragmatic Store</h1>
+<p>Dear <%= @order.name %>,</p>
+
+<p>Thank you for your recent order. We’ll ship your order to:</p>
+
+<pre>
+  <%= @order.address %>
+</pre>
+
+<p>We’ll contact you at <%= @order.email %> if we have questions.</p>

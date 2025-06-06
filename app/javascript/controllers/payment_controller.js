@@ -7,6 +7,10 @@ export default class extends Controller {
     this.showAdditionalFields()
   }
 
+    update() {
+  this.showAdditionalFields()
+}
+
   showAdditionalFields() {
     const selection = this.selectionTarget.value
     this.additionalFieldsTargets.forEach((fields) => {
@@ -15,4 +19,6 @@ export default class extends Controller {
       fields.disabled = !show
     })
   }
+
+
 }

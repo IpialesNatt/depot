@@ -1,60 +1,59 @@
 <%= form_with(model: order, class: "contents") do |form| %>
-<% if order.errors.any? %>
-<div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
-    <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
-
-    <ul class="list-disc ml-6">
+  <% if order.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
+      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+      <ul class="list-disc ml-6">
         <% order.errors.each do |error| %>
-        <li><%= error.full_message %></li>
+          <li><%= error.full_message %></li>
         <% end %>
-    </ul>
-</div>
-<% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<div class="my-5">
+  <div class="my-5">
     <%= form.label :name %>
     <%= form.text_field :name, class: "input-field" %>
-</div>
+  </div>
 
-<div class="my-5">
+  <div class="my-5">
     <%= form.label :address %>
-    <!-- Esto genera “Address” -->
     <%= form.text_area :address, rows: 4, class: "input-field" %>
-    <!-- Esto genera <textarea id="order_address"> -->
-</div>
+  </div>
 
-<div class="my-5">
+  <div class="my-5">
     <%= form.label :email %>
     <%= form.email_field :email, class: "input-field" %>
-</div>
+  </div>
 
-<div data-controller="payment">
+  <div data-controller="payment">
     <div class="my-5">
-        <%= form.label :payment_type_id, "Pay type" %>
-        <%= form.collection_select :payment_type_id, PaymentType.all, :id, :name,
-    { prompt: 'Select a payment method' },
-    {
-      'data-payment-target' => 'selection',
-      'data-action' => 'payment#showAdditionalFields',
-      class: "input-field"
-    } %>
-
+      <%= form.label :payment_type_id, "Pay type" %>
+      <%= form.collection_select :payment_type_id, PaymentType.all, :id, :name,
+          { prompt: 'Select a payment method' },
+          {
+            class: "input-field",
+            data: {
+              action: "payment#update",
+              payment_target: "selection"
+            }
+          } %>
     </div>
 
-    <div data-payment-target="additionalFields" data-type="Check" class="hidden">
-        <%= render partial: 'check', locals: { form: form } %>
+    <div data-payment-target="additionalFields" data-type="Check">
+      <%= render partial: 'check', locals: { form: form } %>
     </div>
 
-    <div data-payment-target="additionalFields" data-type="Credit card" class="hidden">
-        <%= render partial: 'cc', locals: { form: form } %>
+    <div data-payment-target="additionalFields" data-type="Credit card">
+      <%= render partial: 'cc', locals: { form: form } %>
     </div>
 
-    <div data-payment-target="additionalFields" data-type="Purchase order" class="hidden">
-        <%= render partial: 'po', locals: { form: form } %>
+    <div data-payment-target="additionalFields" data-type="Purchase order">
+      <%= render partial: 'po', locals: { form: form } %>
     </div>
-</div>
+  </div>
 
-<div class="inline">
+  <div class="inline">
     <%= form.submit 'Place Order', class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-green-200 hover:bg-blue-500 text-black inline-block font-medium cursor-pointer" %>
-</div>
+  </div>
 <% end %>
+

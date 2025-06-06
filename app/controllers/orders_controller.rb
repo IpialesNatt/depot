@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  include Authentication
+  allow_unauthenticated_access only: %i[ new create ]
  include CurrentCart
 before_action :set_cart, only: %i[ new create ]
 before_action :ensure_cart_isnt_empty, only: %i[ new ]
@@ -25,9 +27,12 @@ before_action :set_order, only: %i[ show edit update destroy ]
   def create
     @order = Order.new(order_params)
     @order.add_line_items_from_cart(@cart)
+    @order.add_line_items_from_cart(@cart)
 
     respond_to do |format|
       if @order.save
+        OrderMailer.received(@order).deliver_later
+
         Cart.destroy(session[:cart_id])
         session[:cart_id] = nil
         format.html { redirect_to store_index_url, notice: "Thank you for your order." }
@@ -65,7 +70,7 @@ before_action :set_order, only: %i[ show edit update destroy ]
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
-      @order = Order.find(params.expect(:id))
+     @order = Order.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
@@ -78,6 +83,18 @@ before_action :set_order, only: %i[ show edit update destroy ]
 def ensure_cart_isnt_empty
   if @cart.line_items.empty?
     redirect_to store_index_url, notice: "Your cart is empty"
+  end
+end
+
+def pay_type_params
+  if order_params[:payment_type_id] == "Credit card"
+    params.require(:order).permit(:credit_card_number, :expiration_date)
+  elsif order_params[:payment_type_id] == "Check"
+    params.require(:order).permit(:routing_number, :account_number)
+  elsif order_params[:payment_type_id] == "Purchase order"
+    params.require(:order).permit(:po_number)
+  else
+    {}
   end
 end
 end

@@ -9,7 +9,14 @@ module ActiveSupport
 
     # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
     fixtures :all
-
+# test/test_helper.rb
+def login_as(user)
+  get users_path
+  post session_path, params: {
+    email_address: user.email_address,
+    password: "password"
+  }
+end
     # Add more helper methods to be used by all tests here...
   end
 end

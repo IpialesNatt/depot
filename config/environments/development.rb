@@ -14,6 +14,15 @@ Rails.application.configure do
 
   # Enable server timing.
   config.server_timing = true
+  # Enable/disable caching. By default caching is disabled. added
+  # config.action_mailer.delivery_method = :smtp
+
+  # Configure the mailer to use SMTP with Gmail. added
+  config.action_mailer.delivery_method = :file
+config.action_mailer.file_settings = {
+  location: Rails.root.join("tmp/mails")
+}
+
 
   # Enable/disable Action Controller caching. By default Action Controller caching is disabled.
   # Run rails dev:cache to toggle Action Controller caching.

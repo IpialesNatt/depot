@@ -28,4 +28,9 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  order_mailer:
+    received:
+      subject: "We've received your order!"
+    shipped:
+      subject: "Your order has shipped!"
+
